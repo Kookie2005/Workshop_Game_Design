@@ -24,14 +24,14 @@ public class PlayerController : MonoBehaviour
     bool isInvincible;
     float damageCoolDown;
 
-    /*Animator animator;
+    Animator animator;
     Vector2 moveDirection = new Vector2(1, 0);
 
     public GameObject projectilePrefab;
 
     public InputAction launchAction;
 
-    public InputAction talkAction;*/
+    //public InputAction talkAction;
 
     void Start()
     {
@@ -39,11 +39,11 @@ public class PlayerController : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
 
         currentHealth = maxHealth;
-        /*animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         launchAction.Enable();
         launchAction.performed += Launch;
-        talkAction.Enable();
-        talkAction.performed += FindFriend;*/
+        //talkAction.Enable();
+        //talkAction.performed += FindFriend;
     }
 
     void Update()
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        /*if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
+        if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
             moveDirection.Set(move.x, move.y);
             moveDirection.Normalize();
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
         animator.SetFloat("Look X", moveDirection.x);
         animator.SetFloat("Look Y", moveDirection.y);
-        animator.SetFloat("Speed", move.magnitude);*/
+        animator.SetFloat("Speed", move.magnitude);
 
     }
 
@@ -89,16 +89,16 @@ public class PlayerController : MonoBehaviour
             }
             isInvincible = true;
             damageCoolDown = timeInvincible;
-            //animator.SetTrigger("Hit");
+            animator.SetTrigger("Hit");
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
 
-        //UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
+        UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
 
     }
 
-    /*void Launch(InputAction.CallbackContext context)
+    void Launch(InputAction.CallbackContext context)
     {
         GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 1.5f, Quaternion.identity);
 
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Launch");
     }
 
-    void FindFriend(InputAction.CallbackContext context)
+    /*void FindFriend(InputAction.CallbackContext context)
     {
         RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, moveDirection, 1.5f, LayerMask.GetMask("NPC"));
 
